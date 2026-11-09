@@ -9,6 +9,7 @@ from display import display_sudoku_solution
 import random, sys
 from DPLL import DPLL
 from SAT import SAT
+from CDCL import CDCL
 
 if __name__ == "__main__":
     # for testing, always initialize the pseudorandom number generator to output the same sequence
@@ -20,12 +21,12 @@ if __name__ == "__main__":
 
     # SAT Learning
     #---------------
-    satInstance = SAT(sys.argv[1])
-    gsatOUT = SAT.gsat()
-    wsatOUT = SAT.walksat()
+    # satInstance = SAT(sys.argv[1])
+    # gsatOUT = SAT.gsat()
+    # wsatOUT = SAT.walksat()
 
-    print("WalkSAT: ", wsatOUT) 
-    print("GSAT: ", gsatOUT)
+    # print("WalkSAT: ", wsatOUT) 
+    # print("GSAT: ", gsatOUT)
 
     # DPLL
     #---------------
@@ -35,3 +36,12 @@ if __name__ == "__main__":
     # if result:
     #     dpll.write_solution(sol_filename)
     #     display_sudoku_solution(sol_filename)
+
+    # CDCL
+    #---------------
+    cdcl = CDCL(sys.argv[1])
+    result = cdcl.run_cdcl()
+    print("RESULT: ", result)
+    if result:
+        cdcl.write_solution(sol_filename)
+        display_sudoku_solution(sol_filename)
